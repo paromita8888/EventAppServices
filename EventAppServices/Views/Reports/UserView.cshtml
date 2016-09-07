@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "User Picture View Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+
+<script src="@Url.Content("~/Scripts/respond.js")"></script> 
+<script src="@Url.Content("~/Scripts/highchart.js")"></script>
+<script src="@Url.Content("https://code.highcharts.com/highcharts.js")"></script>
+<script src="@Url.Content("https://code.highcharts.com/modules/data.js")"></script>
+<script src="@Url.Content("https://code.highcharts.com/modules/drilldown.js")"></script> 
+@using (Html.BeginForm())
+{ 
+    <!-- Page Content -->
+    <div class="container-fluid">
+
+        <!-- Introduction Row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header text-center">
+                    Welcome To Techvantage 2016
+                    <img src="~/Images/tv-app-2.png"  alt="cub image" class="cub-image" />
+                </h1>
+            </div>
+        </div>
+
+
+        <!-- Team Members Row -->
+        <div id="employee_list">
+            <!-- data gets embedded here -->
+
+        </div><!-- /main row -->
+        
+    </div>
+    <!-- /.container -->
+
+    <script> type = "text/javascript" >
+     
+          $(document).ready(function () { 
+              getEmployeeRecords();
+              // SET AUTOMATIC PAGE RELOAD TIME TO 30000 MILISECONDS (30 SECONDS). 
+          });
+
+</script>
+}
+
+<link href="~/Content/roundabout.css" rel="stylesheet" /> 

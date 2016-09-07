@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Login</h2>
+
+<div class="col-md-8">
+    <section id="loginForm">
+        @using (Html.BeginForm("Login", "Login", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal" }))
+            {
+            <div>
+                <table>
+                    <tr>
+                        <td>
+                            @Html.Label("UserName")
+                        </td>
+                        <td>
+                            @Html.TextBox("txtUserName", "", new { @class = "form-control" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.Label("Password")
+                        </td>
+                        <td>
+                            @Html.Password("txtPassword", new { @class = "form-control" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align:right">
+                            <input type="submit" value="Create" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            @ViewBag.Message 
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+
+        }
+    </section>
+</div>

@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr") 
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script type=" text/javascript">
+        var appInsights = window.appInsights || function (config) {
+            function r(config) { t[config] = function () { var i = arguments; t.queue.push(function () { t[config].apply(t, i) }) } } var t = { config: config }, u = document, e = window, o = "script", s = u.createElement(o), i, f; for (s.src = config.url || "//az416426.vo.msecnd.net/scripts/a/ai.0.js", u.getElementsByTagName(o)[0].parentNode.appendChild(s), t.cookie = u.cookie, t.queue = [], i = ["Event", "Exception", "Metric", "PageView", "Trace"]; i.length;) r("track" + i.pop()); return r("setAuthenticatedUserContext"), r("clearAuthenticatedUserContext"), config.disableExceptionTracking || (i = "onerror", r("_" + i), f = e[i], e[i] = function (config, r, u, e, o) { var s = f && f(config, r, u, e, o); return s !== !0 && t["_" + i](config, r, u, e, o), s }), t
+        }({
+            instrumentationKey: "6f8caa08-4879-444c-8aa5-6413c7387488"
+        });
+
+        window.appInsights = appInsights;
+        appInsights.trackPageView(); 
+    </script>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @*@Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    @*<li>@Html.ActionLink("Login", "Login", "Login", new { area = "" }, null)</li>
+                      <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
+                    <li>@Html.ActionLink("PushNotification", "SendPushNotification", "PushNotification", new { area = "" }, null)</li>
+                    <li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>*@
+
+                    <li class="dropdown">
+                        <a id="Reportlink" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            Reports
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("User View", "UserView", "Reports", new { area = "" }, null)</li>
+                            <li>@Html.ActionLink("Bar Chart", "BarChartView", "Reports", new { area = "" }, null)</li> 
+                        </ul>
+                    </li>  
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid body-content">
+        <table class="table">
+            <tr>
+                <td>@RenderBody()</td>
+            </tr>
+            <tr>
+                <td>
+                    <hr />
+                    <footer>
+                        <p>&copy; @DateTime.Now.Year - Hitachi Consulting - Tech Vantage 2016</p>
+                    </footer>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <script type=" text/javascript">
+
+       var interval = setInterval(function () { getEmployeeRecords() }, 3000);
+
+           function getEmployeeRecords() {
+            var totalRecords;
+            console.log('start of getEmployeeRecords');
+            $.ajax({
+                type: "GET",
+              url: "http://techvantage2016live.azurewebsites.net/Api/UserAttendances/GetEventAttandance",
+             dataType: "json",
+                success: function (data) {
+                    console.log('getEmployeeRecords success..');
+                    if (totalRecords !== data.length) {
+                        totalRecords = data.length;
+                        var rowId = 0; var counter = 0;
+
+                                $("#employee_list").empty();
+                        $.each(data, function (item) {
+                            console.log(rowId);
+                            if ((counter) % 6 == 0) {
+                                rowId++;
+                                $("#employee_list").append("<div class='row' id='" + rowId + "'></div>");
+                            }
+                            $("#" + rowId).append("<div class='col-lg-2 col-md-4 col-sm-6 text-center'><img class='img-circle img-responsive img-center' src='" + data[item].PhotoUrl + "' / ><h3>" + data[item].Name + "</h3></div>");
+
+                            counter++;
+                            console.log('RowId: ' + rowId + ' counter:: ' + counter);
+                        });
+                    }
+                },
+                error: function (data) {
+                    console.log('getEmployeeRecords error...');
+                    //alert(data.responseText);
+                }
+            });//ajax call end
+            console.log('end of getEmployeeRecords');
+        }
+
+        function stopinterval() {
+            clearInterval(interval);
+            return false;
+        }
+         $('#Reportlink').click(function() {
+       stopinterval();
+    });
+    </script>
+</body>
+</html>

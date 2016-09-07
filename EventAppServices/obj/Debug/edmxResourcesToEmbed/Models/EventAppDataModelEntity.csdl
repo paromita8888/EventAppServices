@@ -1,0 +1,601 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EventAppDataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AppConfig">
+    <Key>
+      <PropertyRef Name="AppConfigId" />
+    </Key>
+    <Property Name="AppConfigId" Type="Int64" Nullable="false" />
+    <Property Name="AppConfigKey" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="AppConfigValue" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Beacon">
+    <Key>
+      <PropertyRef Name="BeaconId" />
+    </Key>
+    <Property Name="BeaconId" Type="Int64" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="UUID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Major" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Minor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Proximity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="UpdatedBy" Type="Int64" />
+    <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="Int64" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Stalls" Relationship="Self.FK_Stall_Beacon" FromRole="Beacon" ToRole="Stall" />
+  </EntityType>
+  <EntityType Name="Location">
+    <Key>
+      <PropertyRef Name="LocationId" />
+    </Key>
+    <Property Name="LocationId" Type="Int64" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="THTeams" Relationship="Self.FK__THTeam__Location__59FA5E80" FromRole="Location" ToRole="THTeam" />
+    <NavigationProperty Name="Users" Relationship="Self.FK__User__LocationId__534D60F1" FromRole="Location" ToRole="User" />
+    <NavigationProperty Name="PlayerScores" Relationship="EventAppDataModel.FK_PlayerLocation_Location" FromRole="Location" ToRole="PlayerScore" />
+  </EntityType>
+  <EntityType Name="PlayerScore">
+    <Key>
+      <PropertyRef Name="PlayerScoreId" />
+    </Key>
+    <Property Name="PlayerScoreId" Type="Int64" Nullable="false" />
+    <Property Name="EmpId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Quiz1Score" Type="Int32" />
+    <Property Name="Quiz2Score" Type="Int32" />
+    <Property Name="Quiz3Score" Type="Int32" />
+    <Property Name="Quiz4Score" Type="Int32" />
+    <Property Name="LeadershipPosition" Type="Int32" />
+    <Property Name="CummulativeScore" Type="Int32" />
+    <Property Name="locationID" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="Location" Relationship="EventAppDataModel.FK_PlayerLocation_Location" FromRole="PlayerScore" ToRole="Location" />
+  </EntityType>
+  <EntityType Name="RateStall">
+    <Key>
+      <PropertyRef Name="RateStallId" />
+    </Key>
+    <Property Name="RateStallId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StallId" Type="Int64" Nullable="false" />
+    <Property Name="UserId" Type="Int64" Nullable="false" />
+    <Property Name="Rating" Type="Int32" Nullable="false" />
+    <Property Name="Comments" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Stall" Relationship="Self.FK_RateStall_RateStall" FromRole="RateStall" ToRole="Stall" />
+    <NavigationProperty Name="User" Relationship="Self.FK_RateStall_User" FromRole="RateStall" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Session">
+    <Key>
+      <PropertyRef Name="SessionId" />
+    </Key>
+    <Property Name="SessionId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="EndDate" Type="DateTime" Precision="0" />
+    <Property Name="StartTime" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="EndTime" Type="Time" Precision="7" />
+    <Property Name="Venue" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="SpeakerId" Type="Int64" />
+    <Property Name="CreatedBy" Type="Int64" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedBy" Type="Int64" />
+    <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+    <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Speaker" Relationship="Self.FK_Schedule_Speaker" FromRole="Session" ToRole="Speaker" />
+    <NavigationProperty Name="TagDetails" Relationship="Self.FK_TagDetails_Session" FromRole="Session" ToRole="TagDetails" />
+    <NavigationProperty Name="UserReviews" Relationship="Self.FK_UserInterest_Session" FromRole="Session" ToRole="UserReview" />
+    <NavigationProperty Name="UserSessions" Relationship="Self.FK_UserSession_Session" FromRole="Session" ToRole="UserSession" />
+    <NavigationProperty Name="UserAttendances" Relationship="EventAppDataModel.FK_UserAttendance_Session" FromRole="Session" ToRole="UserAttendance" />
+  </EntityType>
+  <EntityType Name="Speaker">
+    <Key>
+      <PropertyRef Name="SpeakerId" />
+    </Key>
+    <Property Name="SpeakerId" Type="Int64" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedBy" Type="Int64" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedBy" Type="Int64" />
+    <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+    <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Intro" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Sessions" Relationship="Self.FK_Schedule_Speaker" FromRole="Speaker" ToRole="Session" />
+  </EntityType>
+  <EntityType Name="Stall">
+    <Key>
+      <PropertyRef Name="StallId" />
+    </Key>
+    <Property Name="StallId" Type="Int64" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedBy" Type="Int64" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedBy" Type="Int64" />
+    <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+    <Property Name="BeaconId" Type="Int64" />
+    <NavigationProperty Name="Beacon" Relationship="Self.FK_Stall_Beacon" FromRole="Stall" ToRole="Beacon" />
+    <NavigationProperty Name="RateStalls" Relationship="Self.FK_RateStall_RateStall" FromRole="Stall" ToRole="RateStall" />
+    <NavigationProperty Name="UserAttendances" Relationship="EventAppDataModel.FK_UserAttendance_Stall" FromRole="Stall" ToRole="UserAttendance" />
+  </EntityType>
+  <EntityType Name="Tag">
+    <Key>
+      <PropertyRef Name="TagId" />
+    </Key>
+    <Property Name="TagId" Type="Int64" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedBy" Type="Int64" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedBy" Type="Int64" />
+    <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="TagDetails" Relationship="Self.FK_TagDetails_Tag" FromRole="Tag" ToRole="TagDetails" />
+  </EntityType>
+  <EntityType Name="TagDetail">
+    <Key>
+      <PropertyRef Name="TagDetailsId" />
+    </Key>
+    <Property Name="TagDetailsId" Type="Int64" Nullable="false" />
+    <Property Name="TagId" Type="Int64" Nullable="false" />
+    <Property Name="SessionId" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="Session" Relationship="Self.FK_TagDetails_Session" FromRole="TagDetails" ToRole="Session" />
+    <NavigationProperty Name="Tag" Relationship="Self.FK_TagDetails_Tag" FromRole="TagDetails" ToRole="Tag" />
+  </EntityType>
+  <EntityType Name="THClueCategory">
+    <Key>
+      <PropertyRef Name="THClueCategoryId" />
+    </Key>
+    <Property Name="THClueCategoryId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="THClueCategoryDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="THClues" Relationship="Self.FK__THClues__THClueC__5EBF139D" FromRole="THClueCategory" ToRole="THClues" />
+  </EntityType>
+  <EntityType Name="THClue">
+    <Key>
+      <PropertyRef Name="THClueId" />
+    </Key>
+    <Property Name="THClueId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="THCluesDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="THClueCategoryId" Type="Int64" Nullable="false" />
+    <Property Name="THAnswer" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="THClueCategory" Relationship="Self.FK__THClues__THClueC__5EBF139D" FromRole="THClues" ToRole="THClueCategory" />
+    <NavigationProperty Name="THTeamClues" Relationship="Self.FK__THTeamClu__THClu__628FA481" FromRole="THClues" ToRole="THTeamClues" />
+    <Property Name="THRiddle" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="THTeam">
+    <Key>
+      <PropertyRef Name="THTeamId" />
+    </Key>
+    <Property Name="THTeamId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="THTeamDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="LocationId" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="Location" Relationship="Self.FK__THTeam__Location__59FA5E80" FromRole="THTeam" ToRole="Location" />
+    <NavigationProperty Name="THTeamClues" Relationship="Self.FK__THTeamClu__THTea__619B8048" FromRole="THTeam" ToRole="THTeamClues" />
+    <NavigationProperty Name="Users" Relationship="Self.FK_User_THTeam" FromRole="THTeam" ToRole="User" />
+    <Property Name="MemberNames" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="THTeamClue">
+    <Key>
+      <PropertyRef Name="THTeamCluesId" />
+    </Key>
+    <Property Name="THTeamCluesId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="THTeamID" Type="Int64" Nullable="false" />
+    <Property Name="THClueID" Type="Int64" Nullable="false" />
+    <Property Name="IsValid" Type="Boolean" />
+    <NavigationProperty Name="THClue" Relationship="Self.FK__THTeamClu__THClu__628FA481" FromRole="THTeamClues" ToRole="THClues" />
+    <NavigationProperty Name="THTeam" Relationship="Self.FK__THTeamClu__THTea__619B8048" FromRole="THTeamClues" ToRole="THTeam" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UserType" Type="Int32" />
+    <Property Name="CreatedBy" Type="Int64" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedBy" Type="Int64" />
+    <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+    <Property Name="EmpID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="EmailId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LocationId" Type="Int64" />
+    <Property Name="THTeamId" Type="Int64" />
+    <NavigationProperty Name="Location" Relationship="Self.FK__User__LocationId__534D60F1" FromRole="User" ToRole="Location" />
+    <NavigationProperty Name="RateStalls" Relationship="Self.FK_RateStall_User" FromRole="User" ToRole="RateStall" />
+    <NavigationProperty Name="THTeam" Relationship="Self.FK_User_THTeam" FromRole="User" ToRole="THTeam" />
+    <NavigationProperty Name="UserSessions" Relationship="Self.FK_serSession_User" FromRole="User" ToRole="UserSession" />
+    <NavigationProperty Name="UserReviews" Relationship="Self.FK_UserInterest_User" FromRole="User" ToRole="UserReview" />
+    <NavigationProperty Name="UserAttendances" Relationship="EventAppDataModel.FK_UserAttendance_User" FromRole="User" ToRole="UserAttendance" />
+    <Property Name="ClaimGoody" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="UserReview">
+    <Key>
+      <PropertyRef Name="UserReviewId" />
+    </Key>
+    <Property Name="UserReviewId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int64" Nullable="false" />
+    <Property Name="SessionId" Type="Int64" Nullable="false" />
+    <Property Name="Rating" Type="Int32" Nullable="false" />
+    <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Session" Relationship="Self.FK_UserInterest_Session" FromRole="UserReview" ToRole="Session" />
+    <NavigationProperty Name="User" Relationship="Self.FK_UserInterest_User" FromRole="UserReview" ToRole="User" />
+  </EntityType>
+  <EntityType Name="UserSession">
+    <Key>
+      <PropertyRef Name="UserID" />
+      <PropertyRef Name="SessionID" />
+    </Key>
+    <Property Name="Isinterested" Type="Boolean" />
+    <Property Name="IsRegistered" Type="Boolean" />
+    <Property Name="UserID" Type="Int64" Nullable="false" />
+    <Property Name="SessionID" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="Session" Relationship="Self.FK_UserSession_Session" FromRole="UserSession" ToRole="Session" />
+    <NavigationProperty Name="User" Relationship="Self.FK_serSession_User" FromRole="UserSession" ToRole="User" />
+  </EntityType>
+  <Association Name="FK_Stall_Beacon">
+    <End Role="Beacon" Type="Self.Beacon" Multiplicity="0..1" />
+    <End Role="Stall" Type="Self.Stall" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Beacon">
+        <PropertyRef Name="BeaconId" />
+      </Principal>
+      <Dependent Role="Stall">
+        <PropertyRef Name="BeaconId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__THTeam__Location__59FA5E80">
+    <End Role="Location" Type="Self.Location" Multiplicity="1" />
+    <End Role="THTeam" Type="Self.THTeam" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Location">
+        <PropertyRef Name="LocationId" />
+      </Principal>
+      <Dependent Role="THTeam">
+        <PropertyRef Name="LocationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__User__LocationId__534D60F1">
+    <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Location">
+        <PropertyRef Name="LocationId" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="LocationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RateStall_RateStall">
+    <End Role="Stall" Type="Self.Stall" Multiplicity="1" />
+    <End Role="RateStall" Type="Self.RateStall" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Stall">
+        <PropertyRef Name="StallId" />
+      </Principal>
+      <Dependent Role="RateStall">
+        <PropertyRef Name="StallId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RateStall_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="RateStall" Type="Self.RateStall" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="RateStall">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Schedule_Speaker">
+    <End Role="Speaker" Type="Self.Speaker" Multiplicity="0..1" />
+    <End Role="Session" Type="Self.Session" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Speaker">
+        <PropertyRef Name="SpeakerId" />
+      </Principal>
+      <Dependent Role="Session">
+        <PropertyRef Name="SpeakerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TagDetails_Session">
+    <End Role="Session" Type="Self.Session" Multiplicity="1" />
+    <End Role="TagDetails" Type="Self.TagDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Session">
+        <PropertyRef Name="SessionId" />
+      </Principal>
+      <Dependent Role="TagDetails">
+        <PropertyRef Name="SessionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserInterest_Session">
+    <End Role="Session" Type="Self.Session" Multiplicity="1" />
+    <End Role="UserReview" Type="Self.UserReview" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Session">
+        <PropertyRef Name="SessionId" />
+      </Principal>
+      <Dependent Role="UserReview">
+        <PropertyRef Name="SessionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserSession_Session">
+    <End Role="Session" Type="Self.Session" Multiplicity="1" />
+    <End Role="UserSession" Type="Self.UserSession" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Session">
+        <PropertyRef Name="SessionId" />
+      </Principal>
+      <Dependent Role="UserSession">
+        <PropertyRef Name="SessionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TagDetails_Tag">
+    <End Role="Tag" Type="Self.Tag" Multiplicity="1" />
+    <End Role="TagDetails" Type="Self.TagDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tag">
+        <PropertyRef Name="TagId" />
+      </Principal>
+      <Dependent Role="TagDetails">
+        <PropertyRef Name="TagId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__THClues__THClueC__5EBF139D">
+    <End Role="THClueCategory" Type="Self.THClueCategory" Multiplicity="1" />
+    <End Role="THClues" Type="Self.THClue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="THClueCategory">
+        <PropertyRef Name="THClueCategoryId" />
+      </Principal>
+      <Dependent Role="THClues">
+        <PropertyRef Name="THClueCategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__THTeamClu__THClu__628FA481">
+    <End Role="THClues" Type="Self.THClue" Multiplicity="1" />
+    <End Role="THTeamClues" Type="Self.THTeamClue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="THClues">
+        <PropertyRef Name="THClueId" />
+      </Principal>
+      <Dependent Role="THTeamClues">
+        <PropertyRef Name="THClueID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__THTeamClu__THTea__619B8048">
+    <End Role="THTeam" Type="Self.THTeam" Multiplicity="1" />
+    <End Role="THTeamClues" Type="Self.THTeamClue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="THTeam">
+        <PropertyRef Name="THTeamId" />
+      </Principal>
+      <Dependent Role="THTeamClues">
+        <PropertyRef Name="THTeamID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_THTeam">
+    <End Role="THTeam" Type="Self.THTeam" Multiplicity="0..1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="THTeam">
+        <PropertyRef Name="THTeamId" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="THTeamId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_serSession_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="UserSession" Type="Self.UserSession" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="UserSession">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserInterest_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="UserReview" Type="Self.UserReview" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="UserReview">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="EventAppDataModelEntity" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AppConfigs" EntityType="Self.AppConfig" />
+    <EntitySet Name="Beacons" EntityType="Self.Beacon" />
+    <EntitySet Name="Locations" EntityType="Self.Location" />
+    <EntitySet Name="PlayerScores" EntityType="Self.PlayerScore" />
+    <EntitySet Name="RateStalls" EntityType="Self.RateStall" />
+    <EntitySet Name="Sessions" EntityType="Self.Session" />
+    <EntitySet Name="Speakers" EntityType="Self.Speaker" />
+    <EntitySet Name="Stalls" EntityType="Self.Stall" />
+    <EntitySet Name="Tags" EntityType="Self.Tag" />
+    <EntitySet Name="TagDetails" EntityType="Self.TagDetail" />
+    <EntitySet Name="THClueCategories" EntityType="Self.THClueCategory" />
+    <EntitySet Name="THClues" EntityType="Self.THClue" />
+    <EntitySet Name="THTeams" EntityType="Self.THTeam" />
+    <EntitySet Name="THTeamClues" EntityType="Self.THTeamClue" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="UserReviews" EntityType="Self.UserReview" />
+    <EntitySet Name="UserSessions" EntityType="Self.UserSession" />
+    <AssociationSet Name="FK_Stall_Beacon" Association="Self.FK_Stall_Beacon">
+      <End Role="Beacon" EntitySet="Beacons" />
+      <End Role="Stall" EntitySet="Stalls" />
+    </AssociationSet>
+    <AssociationSet Name="FK__THTeam__Location__59FA5E80" Association="Self.FK__THTeam__Location__59FA5E80">
+      <End Role="Location" EntitySet="Locations" />
+      <End Role="THTeam" EntitySet="THTeams" />
+    </AssociationSet>
+    <AssociationSet Name="FK__User__LocationId__534D60F1" Association="Self.FK__User__LocationId__534D60F1">
+      <End Role="Location" EntitySet="Locations" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RateStall_RateStall" Association="Self.FK_RateStall_RateStall">
+      <End Role="Stall" EntitySet="Stalls" />
+      <End Role="RateStall" EntitySet="RateStalls" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RateStall_User" Association="Self.FK_RateStall_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="RateStall" EntitySet="RateStalls" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Schedule_Speaker" Association="Self.FK_Schedule_Speaker">
+      <End Role="Speaker" EntitySet="Speakers" />
+      <End Role="Session" EntitySet="Sessions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TagDetails_Session" Association="Self.FK_TagDetails_Session">
+      <End Role="Session" EntitySet="Sessions" />
+      <End Role="TagDetails" EntitySet="TagDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserInterest_Session" Association="Self.FK_UserInterest_Session">
+      <End Role="Session" EntitySet="Sessions" />
+      <End Role="UserReview" EntitySet="UserReviews" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserSession_Session" Association="Self.FK_UserSession_Session">
+      <End Role="Session" EntitySet="Sessions" />
+      <End Role="UserSession" EntitySet="UserSessions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TagDetails_Tag" Association="Self.FK_TagDetails_Tag">
+      <End Role="Tag" EntitySet="Tags" />
+      <End Role="TagDetails" EntitySet="TagDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK__THClues__THClueC__5EBF139D" Association="Self.FK__THClues__THClueC__5EBF139D">
+      <End Role="THClueCategory" EntitySet="THClueCategories" />
+      <End Role="THClues" EntitySet="THClues" />
+    </AssociationSet>
+    <AssociationSet Name="FK__THTeamClu__THClu__628FA481" Association="Self.FK__THTeamClu__THClu__628FA481">
+      <End Role="THClues" EntitySet="THClues" />
+      <End Role="THTeamClues" EntitySet="THTeamClues" />
+    </AssociationSet>
+    <AssociationSet Name="FK__THTeamClu__THTea__619B8048" Association="Self.FK__THTeamClu__THTea__619B8048">
+      <End Role="THTeam" EntitySet="THTeams" />
+      <End Role="THTeamClues" EntitySet="THTeamClues" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_THTeam" Association="Self.FK_User_THTeam">
+      <End Role="THTeam" EntitySet="THTeams" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_serSession_User" Association="Self.FK_serSession_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="UserSession" EntitySet="UserSessions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserInterest_User" Association="Self.FK_UserInterest_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="UserReview" EntitySet="UserReviews" />
+    </AssociationSet>
+    <EntitySet Name="Notifications" EntityType="EventAppDataModel.Notification" />
+    <EntitySet Name="UserAttendances" EntityType="EventAppDataModel.UserAttendance" />
+    <AssociationSet Name="FK_UserAttendance_Session" Association="EventAppDataModel.FK_UserAttendance_Session">
+      <End Role="Session" EntitySet="Sessions" />
+      <End Role="UserAttendance" EntitySet="UserAttendances" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserAttendance_Stall" Association="EventAppDataModel.FK_UserAttendance_Stall">
+      <End Role="Stall" EntitySet="Stalls" />
+      <End Role="UserAttendance" EntitySet="UserAttendances" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserAttendance_User" Association="EventAppDataModel.FK_UserAttendance_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="UserAttendance" EntitySet="UserAttendances" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PlayerLocation_Location" Association="EventAppDataModel.FK_PlayerLocation_Location">
+      <End Role="Location" EntitySet="Locations" />
+      <End Role="PlayerScore" EntitySet="PlayerScores" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Notification">
+    <Key>
+      <PropertyRef Name="NotificationId" />
+    </Key>
+    <Property Name="NotificationId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Message" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedBy" Type="Int64" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedBy" Type="Int64" />
+    <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="UserAttendance">
+    <Key>
+      <PropertyRef Name="UserID" />
+      <PropertyRef Name="SessionID" />
+      <PropertyRef Name="StallID" />
+    </Key>
+    <Property Name="UserID" Type="Int64" Nullable="false" />
+    <Property Name="SessionID" Type="Int64" Nullable="false" />
+    <Property Name="StallID" Type="Int64" Nullable="false" />
+    <Property Name="IsAttendee" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Session" Relationship="EventAppDataModel.FK_UserAttendance_Session" FromRole="UserAttendance" ToRole="Session" />
+    <NavigationProperty Name="Stall" Relationship="EventAppDataModel.FK_UserAttendance_Stall" FromRole="UserAttendance" ToRole="Stall" />
+    <NavigationProperty Name="User" Relationship="EventAppDataModel.FK_UserAttendance_User" FromRole="UserAttendance" ToRole="User" />
+    <Property Name="Createdon" Type="DateTime" Precision="3" />
+  </EntityType>
+  <Association Name="FK_UserAttendance_Session">
+    <End Type="EventAppDataModel.Session" Role="Session" Multiplicity="1" />
+    <End Type="EventAppDataModel.UserAttendance" Role="UserAttendance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Session">
+        <PropertyRef Name="SessionId" />
+      </Principal>
+      <Dependent Role="UserAttendance">
+        <PropertyRef Name="SessionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserAttendance_Stall">
+    <End Type="EventAppDataModel.Stall" Role="Stall" Multiplicity="1" />
+    <End Type="EventAppDataModel.UserAttendance" Role="UserAttendance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Stall">
+        <PropertyRef Name="StallId" />
+      </Principal>
+      <Dependent Role="UserAttendance">
+        <PropertyRef Name="StallID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserAttendance_User">
+    <End Type="EventAppDataModel.User" Role="User" Multiplicity="1" />
+    <End Type="EventAppDataModel.UserAttendance" Role="UserAttendance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="UserAttendance">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PlayerLocation_Location">
+    <End Type="EventAppDataModel.Location" Role="Location" Multiplicity="1" />
+    <End Type="EventAppDataModel.PlayerScore" Role="PlayerScore" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Location">
+        <PropertyRef Name="LocationId" />
+      </Principal>
+      <Dependent Role="PlayerScore">
+        <PropertyRef Name="locationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

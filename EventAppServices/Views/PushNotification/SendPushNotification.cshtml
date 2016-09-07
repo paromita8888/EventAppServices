@@ -1,0 +1,48 @@
+﻿@model EventAppServices.Models.PushNotification
+
+@{
+    ViewBag.Title = "SendPushNotification";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Push Notification for Tech Vantage Event App.</h2>
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
+
+@using (Html.BeginForm()) 
+{
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
+
+    <table class="updatetable" border="0" align="left" cellpadding="2" cellspacing="2">
+        <tr>
+            <td align="right"><h4>Select Apple Configuration:</h4></td>
+            <td>@Html.DropDownList("AppleConfig")</td>
+        </tr>
+        <tr>
+            <td align="right"><h4>Subject:</h4></td>
+            <td>@Html.TextBoxFor(m => m.Subject, new { maxlength = 30,@style = "width:600px;height: 25px;",min="40", @id = "txtSubject" })
+                @Html.ValidationMessageFor(m => m.Subject)
+             
+            
+            </td>
+        </tr>
+        <tr>
+            <td align="right"><h4>Message:</h4></td>
+            <td>@Html.TextAreaFor(m => m.Body, new {maxlength = 210, @style = "width:600px;height: 55px;", @id = "txtBody" })
+                @Html.ValidationMessageFor(m => m.Body)
+               
+            </td>
+        </tr>
+        <tr style="text-align:right">
+            <td colspan="2">
+                <input type="submit" value="Send Notification" />
+            </td>
+
+        </tr>
+        <tr>
+
+            <td colspan="2" style="color:#f00;font-size:larger" align="left">@ViewBag.Message</td>
+        </tr>
+    </table>
+}

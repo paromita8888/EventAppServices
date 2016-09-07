@@ -1,0 +1,238 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="EventAppDataModelStoreContainer" CdmEntityContainer="EventAppDataModelEntity">
+    <EntitySetMapping Name="AppConfigs">
+      <EntityTypeMapping TypeName="EventAppDataModel.AppConfig">
+        <MappingFragment StoreEntitySet="AppConfig">
+          <ScalarProperty Name="AppConfigId" ColumnName="AppConfigId" />
+          <ScalarProperty Name="AppConfigKey" ColumnName="AppConfigKey" />
+          <ScalarProperty Name="AppConfigValue" ColumnName="AppConfigValue" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Beacons">
+      <EntityTypeMapping TypeName="EventAppDataModel.Beacon">
+        <MappingFragment StoreEntitySet="Beacon">
+          <ScalarProperty Name="BeaconId" ColumnName="BeaconId" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="UUID" ColumnName="UUID" />
+          <ScalarProperty Name="Major" ColumnName="Major" />
+          <ScalarProperty Name="Minor" ColumnName="Minor" />
+          <ScalarProperty Name="Proximity" ColumnName="Proximity" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Locations">
+      <EntityTypeMapping TypeName="EventAppDataModel.Location">
+        <MappingFragment StoreEntitySet="Location">
+          <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PlayerScores">
+      <EntityTypeMapping TypeName="EventAppDataModel.PlayerScore">
+        <MappingFragment StoreEntitySet="PlayerScore">
+          <ScalarProperty Name="locationID" ColumnName="locationID" />
+          <ScalarProperty Name="PlayerScoreId" ColumnName="PlayerScoreId" />
+          <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+          <ScalarProperty Name="Quiz1Score" ColumnName="Quiz1Score" />
+          <ScalarProperty Name="Quiz2Score" ColumnName="Quiz2Score" />
+          <ScalarProperty Name="Quiz3Score" ColumnName="Quiz3Score" />
+          <ScalarProperty Name="Quiz4Score" ColumnName="Quiz4Score" />
+          <ScalarProperty Name="LeadershipPosition" ColumnName="LeadershipPosition" />
+          <ScalarProperty Name="CummulativeScore" ColumnName="CummulativeScore" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RateStalls">
+      <EntityTypeMapping TypeName="EventAppDataModel.RateStall">
+        <MappingFragment StoreEntitySet="RateStall">
+          <ScalarProperty Name="RateStallId" ColumnName="RateStallId" />
+          <ScalarProperty Name="StallId" ColumnName="StallId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Rating" ColumnName="Rating" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sessions">
+      <EntityTypeMapping TypeName="EventAppDataModel.Session">
+        <MappingFragment StoreEntitySet="Session">
+          <ScalarProperty Name="SessionId" ColumnName="SessionId" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+          <ScalarProperty Name="Venue" ColumnName="Venue" />
+          <ScalarProperty Name="SpeakerId" ColumnName="SpeakerId" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Speakers">
+      <EntityTypeMapping TypeName="EventAppDataModel.Speaker">
+        <MappingFragment StoreEntitySet="Speaker">
+          <ScalarProperty Name="SpeakerId" ColumnName="SpeakerId" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="Intro" ColumnName="Intro" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Stalls">
+      <EntityTypeMapping TypeName="EventAppDataModel.Stall">
+        <MappingFragment StoreEntitySet="Stall">
+          <ScalarProperty Name="StallId" ColumnName="StallId" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+          <ScalarProperty Name="BeaconId" ColumnName="BeaconId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tags">
+      <EntityTypeMapping TypeName="EventAppDataModel.Tag">
+        <MappingFragment StoreEntitySet="Tag">
+          <ScalarProperty Name="TagId" ColumnName="TagId" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TagDetails">
+      <EntityTypeMapping TypeName="EventAppDataModel.TagDetail">
+        <MappingFragment StoreEntitySet="TagDetails">
+          <ScalarProperty Name="TagDetailsId" ColumnName="TagDetailsId" />
+          <ScalarProperty Name="TagId" ColumnName="TagId" />
+          <ScalarProperty Name="SessionId" ColumnName="SessionId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="THClueCategories">
+      <EntityTypeMapping TypeName="EventAppDataModel.THClueCategory">
+        <MappingFragment StoreEntitySet="THClueCategory">
+          <ScalarProperty Name="THClueCategoryId" ColumnName="THClueCategoryId" />
+          <ScalarProperty Name="THClueCategoryDescription" ColumnName="THClueCategoryDescription" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="THClues">
+      <EntityTypeMapping TypeName="EventAppDataModel.THClue">
+        <MappingFragment StoreEntitySet="THClues">
+          <ScalarProperty Name="THRiddle" ColumnName="THRiddle" />
+          <ScalarProperty Name="THClueId" ColumnName="THClueId" />
+          <ScalarProperty Name="THCluesDescription" ColumnName="THCluesDescription" />
+          <ScalarProperty Name="THClueCategoryId" ColumnName="THClueCategoryId" />
+          <ScalarProperty Name="THAnswer" ColumnName="THAnswer" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="THTeams">
+      <EntityTypeMapping TypeName="EventAppDataModel.THTeam">
+        <MappingFragment StoreEntitySet="THTeam">
+          <ScalarProperty Name="MemberNames" ColumnName="MemberNames" />
+          <ScalarProperty Name="THTeamId" ColumnName="THTeamId" />
+          <ScalarProperty Name="THTeamDescription" ColumnName="THTeamDescription" />
+          <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="THTeamClues">
+      <EntityTypeMapping TypeName="EventAppDataModel.THTeamClue">
+        <MappingFragment StoreEntitySet="THTeamClues">
+          <ScalarProperty Name="THTeamCluesId" ColumnName="THTeamCluesId" />
+          <ScalarProperty Name="THTeamID" ColumnName="THTeamID" />
+          <ScalarProperty Name="THClueID" ColumnName="THClueID" />
+          <ScalarProperty Name="IsValid" ColumnName="IsValid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="EventAppDataModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="ClaimGoody" ColumnName="ClaimGoody" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="UserType" ColumnName="UserType" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+          <ScalarProperty Name="EmpID" ColumnName="EmpID" />
+          <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+          <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+          <ScalarProperty Name="THTeamId" ColumnName="THTeamId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserReviews">
+      <EntityTypeMapping TypeName="EventAppDataModel.UserReview">
+        <MappingFragment StoreEntitySet="UserReview">
+          <ScalarProperty Name="UserReviewId" ColumnName="UserReviewId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="SessionId" ColumnName="SessionId" />
+          <ScalarProperty Name="Rating" ColumnName="Rating" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserSessions">
+      <EntityTypeMapping TypeName="EventAppDataModel.UserSession">
+        <MappingFragment StoreEntitySet="UserSession">
+          <ScalarProperty Name="Isinterested" ColumnName="Isinterested" />
+          <ScalarProperty Name="IsRegistered" ColumnName="IsRegistered" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="SessionID" ColumnName="SessionID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Notifications">
+      <EntityTypeMapping TypeName="EventAppDataModel.Notification">
+        <MappingFragment StoreEntitySet="Notification">
+          <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="NotificationId" ColumnName="NotificationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserAttendances">
+      <EntityTypeMapping TypeName="EventAppDataModel.UserAttendance">
+        <MappingFragment StoreEntitySet="UserAttendance">
+          <ScalarProperty Name="Createdon" ColumnName="Createdon" />
+          <ScalarProperty Name="IsAttendee" ColumnName="IsAttendee" />
+          <ScalarProperty Name="StallID" ColumnName="StallID" />
+          <ScalarProperty Name="SessionID" ColumnName="SessionID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

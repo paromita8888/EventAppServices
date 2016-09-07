@@ -1,0 +1,47 @@
+﻿ 
+@{
+    ViewBag.Title = "Bars View Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/roundabout.css" rel="stylesheet" />
+@using (Html.BeginForm())
+{
+     <div class="container-fluid">
+
+        <table class="table">
+            <tr>
+                <td>
+                    <br/> 
+                    <form action="@Url.Action("BarChartView", "Reports")" method="post">
+                        <!-- Page Content -->
+                        <!--<div class="container-fluid">-->
+                        <!-- Introduction Row -->
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h1 class="page-header text-center">
+                                    Techvantage 2016  - Stall Stats                                   
+                                    <img src="~/Images/tv-app-2.png" alt="cub image" class="cub-image" />
+                                </h1>
+                            </div>
+                        </div> 
+                        <!-- Team Members Row -->
+                        <div class="row" id="employee_list_bar" style="margin: 0 0px">
+                            <!-- data gets embedded here --> 
+                        </div><!-- /main row --> 
+                    </form>
+                </td>
+            </tr>
+            <tr> 
+            </tr>
+        </table> 
+    </div>
+
+
+   
+}
+
+
+<script src="~/Scripts/highchart.js"></script>
+<script src="@Url.Content("https://code.highcharts.com/highcharts.js")"></script>
+<script src="@Url.Content("https://code.highcharts.com/modules/data.js")"></script>
+<script src="@Url.Content("https://code.highcharts.com/modules/drilldown.js")"></script> 
